@@ -10,8 +10,10 @@ const {
   ApolloServerPluginDrainHttpServer,
 } = require("@apollo/server/plugin/drainHttpServer");
 
+const http = require("http");
 
 const app = express();
+const httpServer = http.createServer(app);
 const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
