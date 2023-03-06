@@ -24,11 +24,20 @@ const typeDefs = `#graphql
   type Query {
     me: User
   }
+  input SavedBookInput {
+        authors: [String]
+        description: String
+        bookId: String
+        image: String
+        forSale: String
+        link: String
+        title: String
+    }
 
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(name: String!, email: String!, password: String!): Auth
-    savedBook(book: SaveBookInput): User
+    saveBook(book: SavedBookInput): User
     removeBook(bookId:String!): User
   }
 `;
