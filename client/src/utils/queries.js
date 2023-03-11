@@ -19,3 +19,13 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const GET_SAVED_BOOKS = gql`
+  query allProfiles {
+    profiles {
+      _id
+      name
+      skills
+    }
+  }
+`;

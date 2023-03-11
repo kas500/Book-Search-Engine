@@ -33,3 +33,21 @@ mutation addUser($username: String!, $password: String!, $email: String!) {
   }
 }
 `;
+
+export const SAVE_BOOK = gql`
+  mutation saveBook($book: SavedBookInput!) {
+    saveBook(book: $book) {
+      username
+      email
+      bookCount
+      savedBooks {
+        authors
+        description
+        bookId
+        image
+        link
+        title
+      }
+    }
+  }
+`;
