@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
 const { authMiddleware } = require("./utils/auth");
-const { ApolloServer } = require("@apollo/server");
+const { ApolloServer } = require("apollo-server-express");
 const { expressMiddleware } = require("@apollo/server/express4");
 const { typeDefs, resolvers } = require("./schemas");
 
@@ -34,12 +34,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
-  app.use(
-    "/graphql",
-    expressMiddleware(server, {
-      context: async ({ req }) => ({ token: req.headers.token }),
-    })
-  );
+  server.applyMiddleware({ app });
 
   db.once("open", () => {
     httpServer.listen(PORT, () => {
