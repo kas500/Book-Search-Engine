@@ -23,7 +23,6 @@ mutation addUser($username: String!, $password: String!, $email: String!) {
       savedBooks {
         authors
         bookId
-        image
         link
         title
         description
