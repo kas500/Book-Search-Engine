@@ -6,7 +6,7 @@ import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  
+  // eslint-disable-next-line
   const {loading, data} = useQuery(GET_ME);
   const [removeBook] = useMutation(REMOVE_BOOK);
   // use this to determine if `useEffect()` hook needs to run again
@@ -25,6 +25,7 @@ const SavedBooks = () => {
 
     try {
       // const response = await deleteBook(bookId, token);
+      // eslint-disable-next-line
       const {data} = await removeBook({
         variables: { bookId }
       });
