@@ -5,7 +5,6 @@ const { GraphQLError } = require("graphql");
 const resolvers = {
     Query: {
         me: async (parent, args, context) => {
-            console.log("Context=====",context);
             if (context.user) {
                 const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
@@ -46,7 +45,6 @@ const resolvers = {
             return { token, user };
         },
         saveBook: async (parent, { book }, context) => {
-            console.log("context======", context)
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
@@ -55,8 +53,11 @@ const resolvers = {
                 )
                 return updatedUser;
             }
-            throw new Error
-            ;
+            throw new GraphQLError("Bad credential", {
+                extensions: {
+                  code: "UNAUTHENTICATED",
+                },
+              });
         },
         removeBook: async (parent, { bookId }, context) => {
             if (context.user) {
